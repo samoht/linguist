@@ -261,5 +261,14 @@ module Linguist
         Language["Makefile"]
       end
     end
+
+    disambiguate "OCaml", "Standard ML" do |data|
+      if /OCaml|ocaml|module|let rec| -> |match \S+ with/.match(data)
+        Language["OCaml"]
+      elsif / => |case \S+ of/.match(data)
+        Language["Standard ML"]
+      end
+    end
+
   end
 end
